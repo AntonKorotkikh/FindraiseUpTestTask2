@@ -24,24 +24,11 @@ for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o}
 </script>
 
 <script>
-  const measurementId = "G-J2ZLPBSK6D";
-  const googleApiSecret = "TUl1P7_6RCa742vp4ZUVAA";
-
   console.log("script reached");
   
   FundraiseUp.on('checkoutOpen', function(details) {
     console.log("checkoutOpen triggered");
-    fetch(`https://www.google-analytics.com/mp/collect?measurement_id=${measurementId}&api_secret=${googleApiSecret}`, {
-      method: "POST",
-      body: JSON.stringify({
-        events: [
-          {
-            name: "checkout_opened",
-            params: { }
-          }
-        ]
-      })
-    });
+    gtag('event', 'checkout_opened', {});
     console.log("reached end of checkoutOpen handler");
   });
   
@@ -50,19 +37,9 @@ for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o}
     let amount = details.donation.amount || 0;
     let currency = details.donation.currency || 'USD';
     
-    fetch(`https://www.google-analytics.com/mp/collect?measurement_id=${measurementId}&api_secret=${googleApiSecret}`, {
-      method: "POST",
-      body: JSON.stringify({
-        events: [
-          {
-            name: "donation_submitted",
-            params: {
-              "amount": amount,
-              "currency": currency
-            }
-          }
-        ]
-      })
+    gtag('event', 'donation_submitted', {
+	    amount: amount,
+	    currency: currency
     });
     console.log("reached end of donationComplete handler");
   });
