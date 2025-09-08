@@ -48,15 +48,18 @@ for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o}
 <script>
   FundraiseUp.on('checkoutOpen', function(details) {
     console.log("checkoutOpen triggered");
-	donation: {
-      amount: 50,           // numeric, no currency symbol
+	debugger;
+	let donation = {
+      amount: 50,
       currency: 'USD',
-      recurring: 'one-time' // or 'monthly'
-    },
-    config: {
-      modifyAmount: false,  // skips the Ask screen
+      recurring: 'one-time'
+    }
+    let config = {
+      modifyAmount: false,
       modifyDesignation: true
     }
+	details.donation = donation
+	details.config = config
   });
 </script>
 	
